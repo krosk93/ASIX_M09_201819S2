@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercici 1</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
+    <link href="/css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <h4 class="text-muted">Exercici 1</h4>
+      </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/index.html">Índex</a></li>
+          <li class="breadcrumb-item"><a href="index.html">EAC 1</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Exercici 1</li>
+        </ol>
+      </nav>
+      <div class="jumbotron">
+        <h1 class="display-3">Exercici 1</h1>
+        <p class="lead">
+          En aquest primer exercici, farem un formulari amb un document HTML, i un
+          fitxer PHP que acceptarà l'entrada d'aquest formulari i calcularà la lletra
+          del DNI introduit.
+        </p>
+      </div>
+      <div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Començarem per fer un formulari amb HTML. Assumim que tots sabem fer-ne un.</p>
+          <p>Deixo aquí un exemple de un formulari senzillet.</p>
+          <p>El guardarem amb el nom de fitxer <em>exercici1.html</em></p>
+          <ul class="nav nav-tabs" id="html" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="code1-tab" data-toggle="tab" href="#code1" role="tab" aria-controls="code1" aria-selected="true">Codi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="preview1-tab" data-toggle="tab" href="#preview1" role="tab" aria-controls="preview1" aria-selected="false">Previsualitazació</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="htmlContent">
+            <div class="tab-pane fade show active" id="code1" role="tabpanel" aria-labelledby="code1-tab">
+              <pre class="rounded"><code class="lang-html">
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;utf-8&#x22;&#x3E;
+    &#x3C;title&#x3E;Exercici 1&#x3C;/title&#x3E;
+  &#x3C;/head&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;CALCULADORA DNI&#x3C;/h1&#x3E;
+    &#x3C;h2&#x3E;Introdueix-lo sense lletra!&#x3C;/h2&#x3E;
+    &#x3C;form action=&#x22;exercici1.php&#x22; method=&#x22;post&#x22;&#x3E;
+      &#x3C;input type=&#x22;text&#x22; placeholder=&#x22;DNI sense lletra...&#x22; name=&#x22;DNI&#x22; value=&#x22;&#x22; /&#x3E;
+      &#x3C;button type=&#x22;submit&#x22; name=&#x22;enviar&#x22;&#x3E;Calcula&#x3C;/button&#x3E;
+    &#x3C;/form&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+              </code></pre>
+            </div>
+            <div class="tab-pane fade" id="preview1" role="tabpanel" aria-labelledby="preview1-tab">
+              <div class="border border-top-0 rounded p-3">
+                <h1>CALCULADORA DNI</h1>
+                <h2>Introdueix-lo sense lletra!</h2>
+                <form action="#" method="post" id="form1">
+                  <input type="text" placeholder="DNI sense lletra..." name="DNI" value="" />
+                  <button type="submit" name="enviar">Calcula</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Seguim! Anem a crear el nostre primer fitxer PHP.</p>
+          <p>
+            Però anirem per parts... Primer veurem com hem de llegir el camp que hem introduit en
+            el formulari.
+          </p>
+          <p class="text-justify">
+            En PHP, disposem de certes variables especials, que s'omplen pel sistema. Una
+            d'aquestes variables és $_POST. $_POST es tracta d'un array. Fins ara, és possible
+            que haguem vist arrays o matrius en altres llenguatges de programació. En PHP,
+            els arrays tenen dos modes, l'associatiu i el indexat. El mode indexat és el que
+            coneixem d'altres llenguatges, on els elements de l'array tenen una clau o posició
+            numèrica. En el mode associatiu, l'array és un <em>map</em> o <em>hash table</em>, on
+            tenim una clau que pot ser de tipus string o integer, i un valor que pot ser de
+            qualsevol tipus.
+          </p>
+          <p class="text-justify">
+            <strong>
+              Per a accedir al valor introduit des el formulari en PHP, utilitzarem
+              <code>$_POST['<em>Nom</em>']</code>,
+              on <em>Nom</em> serà el nom que hem escrit dins de la propietat name de l'input:
+              <code>&lt;input name=&quot;<em>Nom</em>&quot;&gt;</code>.
+            </strong>
+          </p>
+          <p class="text-justify">
+            També realitzarem una validació bàsica de que hem introduit un DNI vàlid. Per això,
+            utilitzarem una expresió regular per verificar que és un número de 8 xifres.
+          </p>
+          <p class="text-justify">
+            Per a calcular el DNI, utilitzarem la formula, que consisteix en agafar el residuu de
+            dividir la xifra total del DNI entre 23. Utilitzarem també un array en mode indexat
+            per obtindre la lletra correcta. Utilitzarem <em>intVal()</em> per obtindre el
+            valor numèric de <em>$_POST[&#x27;DNI&#x27;]</em>.
+          </p>
+          <p>I ja sense esperar més, aquí el codi:</p>
+          <pre class="rounded"><code class="lang-php">
+&#x3C;?php
+if(preg_match(&#x27;/^[0-9]{8}$/&#x27;, $_POST[&#x27;DNI&#x27;])) {
+  $chars = array(&#x27;T&#x27;, &#x27;R&#x27;, &#x27;W&#x27;, &#x27;A&#x27;, &#x27;G&#x27;,
+                 &#x27;M&#x27;, &#x27;Y&#x27;, &#x27;F&#x27;, &#x27;P&#x27;, &#x27;D&#x27;,
+                 &#x27;X&#x27;, &#x27;B&#x27;, &#x27;N&#x27;, &#x27;J&#x27;, &#x27;Z&#x27;,
+                 &#x27;S&#x27;, &#x27;Q&#x27;, &#x27;V&#x27;, &#x27;H&#x27;, &#x27;L&#x27;,
+                 &#x27;C&#x27;, &#x27;K&#x27;, &#x27;E&#x27;);
+  $index = intVal($_POST[&#x27;DNI&#x27;]) % 23;
+  echo &#x27;El DNI amb lletra &#xE9;s &#x27;.$_POST[&#x27;DNI&#x27;].$chars[$index];
+}
+else
+{
+  echo &#x27;El DNI introduit no &#xE9;s correcte&#x27;;
+}
+?&#x3E;
+          </code></pre>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup.min.js" integrity="sha256-QciVGr0G0qBC7iVqTH0zo6B2h4sFTL5iyxA3vO0Mu2M=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup-templating.min.js" integrity="sha256-pMuiLxo2EwMAxKJiCvYriP8DK43l9F5GBQX0mSuz5Z4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-php.min.js" integrity="sha256-OLghId7uixH9cRl9BmiTZxGUujGWgpCWYTG4DkCKuMY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      window.addEventListener('load', () => {
+        document.querySelector('#form1').addEventListener('submit', e => {
+          e.stopPropagation();
+          e.preventDefault();
+        });
+      });
+    </script>
+  </body>
+</html>
