@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Exercici 2</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
+    <link href="../css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <h4 class="text-muted">Exercici 2</h4>
+      </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Índex</a></li>
+          <li class="breadcrumb-item"><a href="index.html">EAC 1</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Exercici 2</li>
+        </ol>
+      </nav>
+      <div class="jumbotron">
+        <h1 class="display-3">Exercici 2</h1>
+        <p class="lead text-justify">
+          Seguim! En aquest exercici, farem un altre formulari amb un document HTML, i un
+          fitxer PHP que acceptarà l'entrada d'aquest formulari i generarà una cookie amb els
+          valors que hem introduit.
+        </p>
+        <p class="lead text-justify">
+          Després, farem un altre formulari, i un fitxer PHP que, amb l'entrada d'aquest
+          formulari, comprovarà si hi ha una cookie coincident i en mostrarà el contingut.
+        </p>
+      </div>
+      <div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p>Començarem per fer l'inici de sessió.</p>
+          <p>Deixo aquí un exemple de un formulari senzillet.</p>
+          <p>El guardarem amb el nom de fitxer <em>exercici2.html</em></p>
+          <ul class="nav nav-tabs" id="html1" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="code1-tab" data-toggle="tab" href="#code1" role="tab" aria-controls="code1" aria-selected="true">Codi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="preview1-tab" data-toggle="tab" href="#preview1" role="tab" aria-controls="preview1" aria-selected="false">Previsualitazació</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="htmlContent">
+            <div class="tab-pane fade show active" id="code1" role="tabpanel" aria-labelledby="code1-tab">
+              <pre class="rounded"><code class="lang-html">
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;utf-8&#x22;&#x3E;
+    &#x3C;title&#x3E;Exercici 2&#x3C;/title&#x3E;
+  &#x3C;/head&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;Iniciar sessió&#x3C;/h1&#x3E;
+    &#x3C;form action=&#x22;exercici2.php&#x22; method=&#x22;post&#x22;&#x3E;
+      &#x3C;input type=&#x22;text&#x22; placeholder=&#x22;Nom d'usuari...&#x22; name=&#x22;username&#x22; value=&#x22;&#x22; /&#x3E;
+      &#x3C;input type=&#x22;password&#x22; placeholder=&#x22;Contrasenya...&#x22; name=&#x22;password&#x22; value=&#x22;&#x22; /&#x3E;
+      &#x3C;button type=&#x22;submit&#x22; name=&#x22;enviar&#x22;&#x3E;Iniciar sessió&#x3C;/button&#x3E;
+    &#x3C;/form&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+              </code></pre>
+            </div>
+            <div class="tab-pane fade" id="preview1" role="tabpanel" aria-labelledby="preview1-tab">
+              <div class="border border-top-0 rounded p-3">
+                <h1>Iniciar sessió</h1>
+                <form action="#" method="post">
+                  <input type="text" placeholder="Nom d'usuari..." name="username" value="" />
+                  <input type="password" placeholder="Contrasenya..." name="password" value="" />
+                  <button type="submit" name="enviar">Iniciar sessió</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="text-justify">
+            Seguim! Anem a crear el fitxer PHP que llegirà el formulari, però abans, com vinc fent
+            en aquesta sèrie, una mica d'explicació.
+          </p>
+          <p class="text-justify">
+            En PHP, com ja hem mencionat, disposem de certes variables especials, que s'omplen
+            pel sistema. Un altre d'aquestes variables és <code class="lang-php">$_COOKIE</code>.
+            <code class="lang-php">$_COOKIE</code>, com <code class="lang-php">$_POST</code>,
+            també es tracta d'un array. Donat que el requeriment de l'exercici és poder guardar
+            multiplesusuaris i la seva contrasenya, podem fer-lo servir en mode associatiu, això
+            vol dir utilitzant strings com a index en comptes de valors numèrics.
+          </p>
+          <p class="text-justify">
+            Seguint amb aquesta idea, el que podem fer és emmagatzemar una <em>cookie</em> amb el
+            nom de l'usuari com a nom, i la contrasenya com a contingut. Una aplicació pot
+            generar, dins d'uns límits raonables, tantes <em>cookies</em> com volguem.
+          </p>
+          <p class="text-justify">
+            També és important mencionar que per a emmagatzemar valors, no ho farem directament
+            sobre la variable <code class="lang-php">$_COOKIE</code>, sinó utilitzant la funció
+            <code class="lang-php">setcookie()</code> de PHP. Això és degut a que les cookies
+            alteren el encapçalament de la resposta HTTP, i per PHP li seria molt costós evaluar
+            els canvis en la variable <code class="lang-php">$_COOKIE</code> abans d'enviar
+            resposta al navegador.
+          </p>
+          <p class="text-justify">
+            I el codi que emmagatzemarà aquest &quot;inici de sessió&quot; és:
+          </p>
+          <pre class="rounded"><code class="lang-php">
+&#x3C;?php
+setcookie($_POST[&#x27;username&#x27;], $_POST[&#x27;password&#x27;], time() + 2*3600, &#x27;/&#x27;);
+?&#x3E;
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;utf-8&#x22;&#x3E;
+    &#x3C;title&#x3E;Exercici 2&#x3C;/title&#x3E;
+  &#x3C;/head&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;Dades guardades correctament.&#x3C;/h1&#x3E;
+    &#x3C;a href=&#x22;exercici2.html&#x22;&#x3E;Tornar&#x3C;/a&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+          </code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="text-justify">
+            Ara anem a fer la part de comprovació de l'usuari.
+          </p>
+          <p class="text-justify">
+            Guardarem un formulari HTML amb el nom exercici2_cons.html:
+          </p>
+          <ul class="nav nav-tabs" id="html2" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" id="code2-tab" data-toggle="tab" href="#code2" role="tab" aria-controls="code2" aria-selected="true">Codi</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" id="preview2-tab" data-toggle="tab" href="#preview2" role="tab" aria-controls="preview2" aria-selected="false">Previsualitazació</a>
+            </li>
+          </ul>
+          <div class="tab-content" id="htmlContent">
+            <div class="tab-pane fade show active" id="code2" role="tabpanel" aria-labelledby="code2-tab">
+              <pre class="rounded"><code class="lang-html">
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;utf-8&#x22;&#x3E;
+    &#x3C;title&#x3E;Exercici 2 Consulta&#x3C;/title&#x3E;
+  &#x3C;/head&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;h1&#x3E;Consultar&#x3C;/h1&#x3E;
+    &#x3C;form action=&#x22;exercici2_cons.php&#x22; method=&#x22;post&#x22;&#x3E;
+      &#x3C;input type=&#x22;text&#x22; placeholder=&#x22;Nom d'usuari...&#x22; name=&#x22;username&#x22; value=&#x22;&#x22; /&#x3E;
+      &#x3C;button type=&#x22;submit&#x22; name=&#x22;enviar&#x22;&#x3E;Verificar&#x3C;/button&#x3E;
+    &#x3C;/form&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+              </code></pre>
+            </div>
+            <div class="tab-pane fade" id="preview2" role="tabpanel" aria-labelledby="preview2-tab">
+              <div class="border border-top-0 rounded p-3">
+                <h1>Consultar</h1>
+                <form action="#" method="post">
+                  <input type="text" placeholder="Nom d'usuari..." name="username" value="" />
+                  <button type="submit" name="enviar">Verificar</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <p class="text-justify">
+            Donat que hem fet servir el nom de la <em>cookie</em> per emmagatzemar el nom de
+            l'usuari, podem verificar l'existència de la clau (el nom d'usuari) a la matriu
+            <code class="lang-php">$_COOKIE</code>.
+          </p>
+          <p class="text-justify">
+            Una funcionalitat interessant de PHP és que ens permet intercalar codi PHP i HTML
+            d'una forma senzilla. També existeix la forma curta d'imprimir una variable
+            <code class="lang-php">&#x3C;?=$variable;?&#x3E;</code>, que imprimirà la variable
+            <code class="lang-php">$variable</code> allà on ho posem.
+          </p>
+          <p class="text-justify">
+            El següent seria un exemple de com podem implementar aquesta funcionalitat amb
+            PHP:
+          </p>
+          <pre class="rounded"><code class="lang-php">
+&#x3C;?php
+$message = &#x27;&#x27;;
+if(isset($_POST[&#x27;username&#x27;]) &#x26;&#x26; isset($_COOKIE[$_POST[&#x27;username&#x27;]])) {
+  $message = &#x27;Usuari &#x27;.$_POST[&#x27;username&#x27;].&#x27;. Contrasenya: &#x27;.$_COOKIE[$_POST[&#x27;username&#x27;]];
+} else {
+  $message = &#x27;Error: Usuari no trobat.&#x27;;
+}
+?&#x3E;
+&#x3C;!DOCTYPE html&#x3E;
+&#x3C;html&#x3E;
+  &#x3C;head&#x3E;
+    &#x3C;meta charset=&#x22;utf-8&#x22;&#x3E;
+    &#x3C;title&#x3E;Exercici 2 Consulta&#x3C;/title&#x3E;
+  &#x3C;/head&#x3E;
+  &#x3C;body&#x3E;
+    &#x3C;p&#x3E;&#x3C;?=$message;?&#x3E;&#x3C;/p&#x3E;
+    &#x3C;a href=&#x22;exercici2_cons.html&#x22;&#x3E;Tornar&#x3C;/a&#x3E;
+  &#x3C;/body&#x3E;
+&#x3C;/html&#x3E;
+          </code></pre>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup.min.js" integrity="sha256-QciVGr0G0qBC7iVqTH0zo6B2h4sFTL5iyxA3vO0Mu2M=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup-templating.min.js" integrity="sha256-pMuiLxo2EwMAxKJiCvYriP8DK43l9F5GBQX0mSuz5Z4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-php.min.js" integrity="sha256-OLghId7uixH9cRl9BmiTZxGUujGWgpCWYTG4DkCKuMY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      window.addEventListener('load', () => {
+        document.querySelectorAll('.tab-pane form').forEach(el => {
+          el.addEventListener('submit', e => {
+            e.stopPropagation();
+            e.preventDefault();
+          });
+        });
+        document.querySelectorAll('.tab-pane a').forEach(el => {
+          el.addEventListener('click', e => {
+            e.stopPropagation();
+            e.preventDefault();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
