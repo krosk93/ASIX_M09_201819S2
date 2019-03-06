@@ -83,7 +83,8 @@
           </p>
           <p class="text-justify">
             En PHP, disposem de certes variables especials, que s'omplen pel sistema. Una
-            d'aquestes variables és $_POST. $_POST es tracta d'un array. Fins ara, és possible
+            d'aquestes variables és <code class="lang-php">$_POST</code>.
+            <code class="lang-php">$_POST</code> es tracta d'un array. Fins ara, és possible
             que haguem vist arrays o matrius en altres llenguatges de programació. En PHP,
             els arrays tenen dos modes, l'associatiu i el indexat. El mode indexat és el que
             coneixem d'altres llenguatges, on els elements de l'array tenen una clau o posició
@@ -94,20 +95,28 @@
           <p class="text-justify">
             <strong>
               Per a accedir al valor introduit des el formulari en PHP, utilitzarem
-              <code>$_POST['<em>Nom</em>']</code>,
+              <code class="lang-php">$_POST['<em>Nom</em>']</code>,
               on <em>Nom</em> serà el nom que hem escrit dins de la propietat name de l'input:
-              <code>&lt;input name=&quot;<em>Nom</em>&quot;&gt;</code>.
+              <code class="lang-php">&lt;input name=&quot;<em>Nom</em>&quot;&gt;</code>.
             </strong>
           </p>
           <p class="text-justify">
             També realitzarem una validació bàsica de que hem introduit un DNI vàlid. Per això,
             utilitzarem una expresió regular per verificar que és un número de 8 xifres.
+            La validació de l'expresió regular la farem amb
+            <code class="lang-php">preg_match(string $pattern, string $subject) : int</code>,
+            un mètode de PHP que retorna 1 si es troba el <code class="lang-php">$pattern</code>
+            a <code class="lang-php">$subject</code>, 0 si no es troba, o FALSE si dona error.
+            Donat que 0 és un valor <em>falsy</em> (evalua com false) en PHP, i 1 és
+            <em>truthy</em> (evalua com true), podem posar l'instrucció dins el condicionant
+            d'un <em>if</em>.
           </p>
           <p class="text-justify">
             Per a calcular el DNI, utilitzarem la formula, que consisteix en agafar el residuu de
             dividir la xifra total del DNI entre 23. Utilitzarem també un array en mode indexat
-            per obtindre la lletra correcta. Utilitzarem <em>intVal()</em> per obtindre el
-            valor numèric de <em>$_POST[&#x27;DNI&#x27;]</em>.
+            per obtindre la lletra correcta. Utilitzarem
+            <code class="lang-php">intVal(mixed $var [, $base = 10]) : int</code>
+            per obtindre el valor numèric de <code class="lang-php">$_POST[&#x27;DNI&#x27;]</code>.
           </p>
           <p>I ja sense esperar més, aquí el codi:</p>
           <pre class="rounded"><code class="lang-php">
