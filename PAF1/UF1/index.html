@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>UF1</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism.min.css" integrity="sha256-N1K43s+8twRa+tzzoF3V8EgssdDiZ6kd9r8Rfgg8kZU=" crossorigin="anonymous" />
+    <link href="../../css/main.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header clearfix">
+        <h4 class="text-muted">UF1</h4>
+      </div>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../../index.html">Índex</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">PAF1</a></li>
+          <li class="breadcrumb-item active" aria-current="page">UF1</li>
+        </ol>
+      </nav>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 1 (1.5 punts)</h2>
+          <h5 class="text-justify">
+            Quina diferència hi ha entre una petició GET i una petició POST? Anomena 3 diferències.
+          </h5>
+          <p>Diferències:</p>
+          <ul>
+            <li class="text-justify">
+              POST admet un bloc de dades a la petició, GET no. Per tant, al transmetre dades,
+              en GET van visibles a la URL. En POST es transmeten de forma invisible a l'usuari
+              en la petició.
+            </li>
+            <li class="text-justify">
+              En GET les dades a transmetre poden ser només caràcters ASCII, per tant s'han de
+              codificar (URL Encode). En POST no existeix aquesta restricció.
+            </li>
+            <li class="text-justify">
+              En GET hi ha una limitació de dades a transmetre (la longitud màxima d'una URL és
+              2048 caràcters). En POST no existeix aquesta limitació.
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 2 (1 punt)</h2>
+          <h5 class="text-justify">
+            Fes un formulari que demani a l'usuari una forma de pagament.
+            Les opcions seran: <em>Transferència bancaria</em>,
+            <em>Pagament amb targeta</em> i <em>Pagament contra reemborsament</em>.
+            La dada introduïda per l'usuari es mostrarà en un altre pàgina, amb el format següent:
+          </h5>
+          <p>Opció de pagament escollida: <span class="font-italic">Pagament amb targeta</span>.</p>
+          <h6>index.html</h6>
+          <pre class="rounded"><code class="lang-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Pagament&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action=&quot;index.php&quot; method=&quot;POST&quot;&gt;
+    &lt;label for=&quot;pagament&quot;&gt;Forma de pagament:&lt;/label&gt;
+    &lt;select name=&quot;pagament&quot; id=&quot;pagament&quot;&gt;
+      &lt;option value=&quot;Transferència bancaria&quot;&gt;Transferència bancaria&lt;/option&gt;
+      &lt;option value=&quot;Pagament amb targeta&quot;&gt;Pagament amb targeta&lt;/option&gt;
+      &lt;option value=&quot;Pagament contra reemborsament&quot;&gt;Pagament contra reemborsament&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;enviar&quot; value=&quot;Enviar&quot; /&gt;
+  &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+          <h6>index.php</h6>
+          <pre class="rounded"><code class="lang-php">
+&lt;?php
+if(!isset($_POST[&apos;enviar&apos;]) || !isset($_POST[&apos;pagament&apos;]))
+  header(&apos;Location: index.html&apos;);
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Pagament&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Opció de pagament escollida: &lt;?=$_POST[&apos;pagament&apos;];?&gt;&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 3 (0.5 punts)</h2>
+          <h5 class="text-justify">
+            Executem el següent codi. Què s'imprimirà en pantalla?
+          </h5>
+          <pre class="rounded"><code class="lang-php">
+&lt;?php
+$a = array(&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, 0 =&gt; &apos;d&apos;, 1 =&gt; &apos;e&apos;, &apos;f&apos;);
+echo count($a);
+?&gt;
+          </code></pre>
+          <ol type="a">
+            <li>3</li>
+            <li class="font-weight-bold">4</li>
+            <li>5</li>
+            <li>Cap de les anteriors és correcte</li>
+          </ol>
+          <h6>Raonament</h6>
+          <p class="text-justify">
+            En PHP, existeix una propietat en l'inicialitzador d'Arrays, que és que sobreescriu
+            una posició anteriorment declarada en cas de repetició. Per defecte, si no donem posició,
+            es crea un array numèric. Per tant, el valor 'a' es trobaria en la posició 0, el valor
+            'b' en la posició 1, i 'c' en la posició 2. Llavors s'indica que 'd' es troba en la
+            posició 0, sobreescrivint 'a', i 'e' en la posició 1, sobreescrivint 'b'. Finalment,
+            'f' pren la primera posició lliure, es a dir, la posició 3.
+          </p>
+          <p class="text-justify">
+            Per tant, l'array conté 4 valors.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 4 (0.5 punts)</h2>
+          <h5 class="text-justify">
+            Quin mètode permet en PHP executar una funció sobre cada element d'un array?
+          </h5>
+          <ol type="a">
+            <li>array_each()</li>
+            <li class="font-weight-bold">array_walk()</li>
+            <li>foreach()</li>
+            <li>list()</li>
+          </ol>
+          <h6>Raonament</h6>
+          <p class="text-justify">
+            Sota el meu parer, l'opció més correcte és array_walk(), doncs foreach() el que ens
+            permetria és executar un bloc d'instruccions, no una funció directament. En canvi,
+            array_walk() ens permet executar una funció, un callback, per cada element.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 5 (1 punt)</h2>
+          <h5 class="text-justify">
+            Amb quina instrucció guardaries una cookie amb les següents característiques:
+          </h5>
+          <h6>Nom: <span class="font-italic">PAF</span></h6>
+          <h6>Durada: <span class="font-italic">1,50 minuts</span></h6>
+          <h6>Valor: <span class="font-italic">1</span></h6>
+          <pre class="rounded"><code class="lang-php">
+setcookie('PAF', '1', 90);
+          </code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 6 (1 punt)</h2>
+          <h5 class="text-justify">
+            Què son les sessions? Per a que serveixen? Anomena alguns exemples.
+          </h5>
+          <p class="text-justify">
+            Les sessions a un lloc web són una eina que permet emmagatzemar informació específica
+            de l’usuari visitant en variables. Poden servir per emmagatzemar dades com quin és
+            l'id de l'usuari que ha iniciat sessió, sense possibilitat de que aquest sigui alterat
+            directament per l'usuari (com passaria amb les cookies), degut a que s'emmagatzema al
+            servidor. També es pot utilitzar com a caché de dades que es demanen freqüentment a
+            base de dades, com informació addicional del usuari que ha iniciat sessió, o d'alguna
+            entitat relacionada amb ell que normalment no variï en el transcurs d'una sessió.
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 7 (2 punts)</h2>
+          <h5 class="text-justify">
+            Dissenya un formulari per a introduir l’autenticació d’un usuari.
+            Ha de contenir els camps de nom d’usuari i de contrasenya.
+            Després, fes una pàgina que emmagatzemi aquestes dades en sessió.
+            Per últim, fes una pàgina que mostri aquestes dades.
+          </h5>
+          <h6>index.html</h6>
+          <pre class="rounded"><code class="lang-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;Iniciar sessió&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;form action=&quot;index.php&quot; method=&quot;POST&quot;&gt;
+    &lt;label for=&quot;username&quot;&gt;Usuari:&lt;/label&gt;
+    &lt;input type=&quot;text&quot; name=&quot;username&quot; id=&quot;username&quot; /&gt;
+    &lt;label for=&quot;password&quot;&gt;Contrasenya:&lt;/label&gt;
+    &lt;input type=&quot;password&quot; name=&quot;password&quot; value=&quot;&quot; id=&quot;password&quot; /&gt;
+    &lt;input type=&quot;submit&quot; name=&quot;enviar&quot; value=&quot;Enviar&quot; /&gt;
+  &lt;/form&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+          <h6>index.php</h6>
+          <pre class="rounded"><code class="lang-php">
+&lt;?php
+if(!isset($_POST[&apos;enviar&apos;]) || !isset($_POST[&apos;username&apos;]) || !isset($_POST[&apos;password&apos;]))
+  header(&apos;Location: index.html&apos;);
+
+session_start();
+$_SESSION[&apos;username&apos;] = $_POST[&apos;username&apos;];
+$_SESSION[&apos;password&apos;] = $_POST[&apos;password&apos;];
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Iniciar sessió&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Dades emmagatzemades correctament.&lt;/p&gt;
+    &lt;a href=&quot;consulta.php&quot;&gt;Anar a consultar-les&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+          <h6>consulta.php</h6>
+          <pre class="rounded"><code class="lang-php">
+&lt;?php
+session_start();
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Iniciar sessió&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p&gt;Dades emmagatzemades:&lt;/p&gt;
+    &lt;p&gt;Usuari: &lt;?=isset($_SESSION[&apos;username&apos;]) ? $_SESSION[&apos;username&apos;]: &apos;&apos;;?&gt;&lt;/p&gt;
+    &lt;p&gt;Contrasenya: &lt;?=isset($_SESSION[&apos;password&apos;])?$_SESSION[&apos;password&apos;]:&apos;&apos;;?&gt;&lt;/p&gt;
+    &lt;a href=&quot;index.html&quot;&gt;Anar a inici&lt;/a&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <h2>Exercici 8 (1.5 punts)</h2>
+          <h5 class="text-justify">
+            Fes una pàgina que permeti consultar el contingut d’una taula MySQL.
+            La base de dades es diu AGENDA, que conté una sola taula anomenada DIRECCIONS.
+            Aquesta taula només té 3 camps: Nom, Cognom1 i Cognom2.
+          </h5>
+          <h6>index.php</h6>
+          <pre class="rounded"><code class="lang-php">
+&lt;?php
+$conn = mysqli_connect(&apos;localhost&apos;, &apos;root&apos;, &apos;root&apos;, &apos;AGENDA&apos;);
+$data = $conn-&gt;query(&apos;SELECT * FROM DIRECCIONS&apos;);
+?&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot;&gt;
+    &lt;title&gt;Agenda&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Agenda - Direccions&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;th&gt;Nom&lt;/th&gt;
+          &lt;th&gt;Primer cognom&lt;/th&gt;
+          &lt;th&gt;Segon cognom&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;?php while($row = $data-&gt;fetch_assoc()) { ?&gt;
+          &lt;tr&gt;
+            &lt;td&gt;&lt;?=$row[&apos;Nom&apos;];?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?=$row[&apos;Cognom1&apos;];?&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;?=$row[&apos;Cognom2&apos;];?&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;?php } ?&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+          </code></pre>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js" integrity="sha256-jc6y1s/Y+F+78EgCT/lI2lyU7ys+PFYrRSJ6q8/R8+o=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup.min.js" integrity="sha256-QciVGr0G0qBC7iVqTH0zo6B2h4sFTL5iyxA3vO0Mu2M=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup-templating.min.js" integrity="sha256-pMuiLxo2EwMAxKJiCvYriP8DK43l9F5GBQX0mSuz5Z4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-php.min.js" integrity="sha256-OLghId7uixH9cRl9BmiTZxGUujGWgpCWYTG4DkCKuMY=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      window.addEventListener('load', () => {
+        document.querySelector('#form1').addEventListener('submit', e => {
+          e.stopPropagation();
+          e.preventDefault();
+        });
+      });
+    </script>
+  </body>
+</html>
